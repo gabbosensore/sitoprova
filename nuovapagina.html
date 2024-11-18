@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoraggio Qualità dell'Aria</title>
+    <style>
+        /* Importazione del font Poppins */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Stile di base */
+        body, html {
+            font-family: 'Poppins', sans-serif;
+            height: 100%;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Video di sfondo */
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Contenitore principale */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+
+        /* Titolo */
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        /* Sezione valori sensori */
+        .sensor-values {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px; /* Distanza tra i contenitori */
+            margin-bottom: 30px;
+        }
+
+        /* Card sensori */
+        .card {
+            width: 200px;
+            height: 180px;
+            background-color: black;
+            border-radius: 15px;
+            padding: 10px;
+            text-align: center;
+            color: #39cb69;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .label {
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .value {
+            font-size: 40px;
+            color: #39cb69;
+            font-weight: bold;
+        }
+
+        .unit {
+            font-size: 14px;
+            color: #39cb69;
+        }
+
+        /* Barre verdi laterali */
+        .card::before, .card::after {
+            content: "";
+            position: absolute;
+            top: 20%;
+            bottom: 20%;
+            width: 4px;
+            background-color: #39cb69;
+        }
+
+        .card::before {
+            left: -8px;
+        }
+
+        .card::after {
+            right: -8px;
+        }
+
+        /* Contenitore temperatura e umidità */
+        .temp-humidity {
+            background-color: black;
+            border-radius: 10px;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .temp-humidity .label {
+            font-size: 16px;
+            color: #39cb69;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .temp-humidity .value {
+            font-size: 24px;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Video di sfondo -->
+    <video class="background-video" autoplay muted loop>
+        <source src="3c3948e6db.mp4" type="video/mp4">
+        Il tuo browser non supporta il tag video.
+    </video>
+
+    <!-- Contenitore principale -->
+    <div class="container">
+        <div class="title">Monitoraggio Qualità dell'Aria</div>
+        <div class="subtitle">Liceo Antonio Rosmini</div>
+
+        <!-- Sezione valori sensori -->
+        <div class="sensor-values">
+            <div class="card">
+                <div class="label">CO</div>
+                <div class="value">298</div>
+                <div class="unit">PPM</div>
+            </div>
+            <div class="card">
+                <div class="label">VOC</div>
+                <div class="value">588</div>
+                <div class="unit">PPM</div>
+            </div>
+            <div class="card">
+                <div class="label">ETAN</div>
+                <div class="value">988</div>
+                <div class="unit">PPM</div>
+            </div>
+            <div class="card">
+                <div class="label">NO2</div>
+                <div class="value">988</div>
+                <div class="unit">PPM</div>
+            </div>
+        </div>
+
+        <!-- Contenitore temperatura e umidità -->
+        <div class="temp-humidity">
+            <div class="label">Temperatura e Umidità</div>
+            <div class="value">20°C</div>
+            <div class="value">25%</div>
+        </div>
+    </div>
+</body>
+</html>
