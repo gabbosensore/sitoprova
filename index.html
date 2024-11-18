@@ -149,7 +149,7 @@
 <body>
     <!-- Video di sfondo -->
     <video class="background-video" autoplay muted loop>
-        <source src="3c3948e6db.mp4" type="video/mp4">
+        <source src="images/3c3948e6db.mp4" type="video/mp4">
         Il tuo browser non supporta il tag video.
     </video>
 
@@ -162,22 +162,22 @@
         <div class="sensor-values">
             <div class="card">
                 <div class="label">CO</div>
-                <div class="value">298</div>
+                <div class="value" id="co-value">--</div>
                 <div class="unit">PPM</div>
             </div>
             <div class="card">
                 <div class="label">VOC</div>
-                <div class="value">588</div>
+                <div class="value" id="voc-value">--</div>
                 <div class="unit">PPM</div>
             </div>
             <div class="card">
                 <div class="label">ETAN</div>
-                <div class="value">988</div>
+                <div class="value" id="etan-value">--</div>
                 <div class="unit">PPM</div>
             </div>
             <div class="card">
                 <div class="label">NO2</div>
-                <div class="value">988</div>
+                <div class="value" id="no2-value">--</div>
                 <div class="unit">PPM</div>
             </div>
         </div>
@@ -185,9 +185,62 @@
         <!-- Contenitore temperatura e umidità -->
         <div class="temp-humidity">
             <div class="label">Temperatura e Umidità</div>
-            <div class="value">20°C</div>
-            <div class="value">25%</div>
+            <div class="value" id="temperature-value">--°C</div>
+            <div class="value" id="humidity-value">--%</div>
         </div>
     </div>
+
+    <!-- Firebase e JavaScript -->
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js"></script>
+    <script>
+        // Configurazione Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBV6CLttkFnO38-SPP8oNx3qO19m05oyzc",
+            authDomain: "monitoraggiosensori.firebaseapp.com",
+            projectId: "monitoraggiosensori",
+            storageBucket: "monitoraggiosensori.appspot.com",
+            messagingSenderId: "303840531193",
+            appId: "1:303840531193:web:b54ba0950a27bfa2494828",
+            databaseURL: "https://monitoraggiosensori-default-rtdb.firebaseio.com/"
+        };
+
+        // Inizializzazione Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Riferimenti ai dati nel database
+        const coRef = database.ref('sensors/co');
+        const vocRef = database.ref('sensors/voc');
+        const etanRef = database.ref('sensors/etan');
+        const no2Ref = database.ref('sensors/no2');
+        const temperatureRef = database.ref('sensors/temperature');
+        const humidityRef = database.ref('sensors/humidity');
+
+        // Aggiornamento dei valori in tempo reale
+        coRef.on('value', (snapshot) => {
+            document.getElementById('co-value').innerText = snapshot.val();
+        });
+
+        vocRef.on('value', (snapshot) => {
+            document.getElementById('voc-value').innerText = snapshot.val();
+        });
+
+        etanRef.on('value', (snapshot) => {
+            document.getElementById('etan-value').innerText = snapshot.val();
+        });
+
+        no2Ref.on('value', (snapshot) => {
+            document.getElementById('no2-value').innerText = snapshot.val();
+        });
+
+        temperatureRef.on('value', (snapshot) => {
+            document.getElementById('temperature-value').innerText = snapshot.val() + '°C';
+        });
+
+        humidityRef.on('value', (snapshot) => {
+            document.getElementById('humidity-value').innerText = snapshot.val() + '%';
+        });
+    </script>
 </body>
 </html>
